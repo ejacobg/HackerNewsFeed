@@ -18,6 +18,7 @@ namespace HackerNewsFeed.Models
         [DataType(DataType.Date)] public DateTime Created { get; set; }
 
         // Updated represents the time this item was last updated from the API.
+        // Changing the subscription status shouldn't affect this timestamp.
         [DataType(DataType.Date)] public DateTime Updated { get; set; }
 
         // Subscribed is true if the user opened the item or explicitly subscribed to it, false if the user explicitly unsubscribed from it, and null if the user has yet to interact with this item.
