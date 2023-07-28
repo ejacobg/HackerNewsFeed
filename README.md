@@ -1,2 +1,3 @@
 # HackerNewsFeed
- An alternative Hacker News frontend.
+
+An alternative Hacker News frontend.
