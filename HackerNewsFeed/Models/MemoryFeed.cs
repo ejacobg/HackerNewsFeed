@@ -21,6 +21,7 @@ namespace HackerNewsFeed.Models
                     Title = $"Item {i}",
                     Url = $"/item/{i}",
                     Points = i,
+                    Created = DateTime.Now,
                     Updated = DateTime.Now,
                     Subscribed = null
                 });

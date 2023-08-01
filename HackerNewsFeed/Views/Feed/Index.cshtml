@@ -1,7 +1,58 @@
+@model IEnumerable<Item>
+
 @{
     ViewBag.Title = "Feed";
 }
 
-<h2>Feed</h2>
+<h1>Feed</h1>
 
-<p>News feed...</p>
+<button class="btn btn-primary">Refresh</button>
+<button class="btn btn-danger">Clear</button>
+<button class="btn btn-info">View All</button>
+
+<table class="table">
+    <thead>
+    <tr>
+        <th>
+            Points
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Created
+        </th>
+        <th>
+            Discussion
+        </th>
+        <th>
+            Subscribed
+        </th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.Points
+            </td>
+            <td>
+                <a href="@item.Url">@Html.DisplayFor(modelItem => item.Title)</a>
+            </td>
+            <td>
+                @item.Created.ToString("g")
+            </td>
+            <td>
+                @item.ItemId
+            </td>
+            <td>
+                <input type="checkbox" @(item.Subscribed.GetValueOrDefault() ? "checked" : "")/>
+                @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
+                @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
+                @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
