@@ -1,0 +1,15 @@
+### Get a single item (Firebase).
+GET https://hacker-news.firebaseio.com/v0/item/{{itemid}}.json
+Accept: application/json
+
+### Get a single item (Algolia).
+GET https://hn.algolia.com/api/v1/items/{{itemid}}
+Accept: application/json
+
+### Pulls (at most) the first 60 front page items.
+GET https://hn.algolia.com/api/v1/search?tags=front_page&hitsPerPage=60
+Accept: application/json
+
+### Pulls (at most) the first 90 Ask HN items since 2023/07/28.
+GET https://hn.algolia.com/api/v1/search?tags=ask_hn&hitsPerPage=90&numericFilters=created_at_i>1690527600
+Accept: application/json
