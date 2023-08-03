@@ -4,6 +4,7 @@ using System.Net.Http;
 using System.Net.Http.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using HackerNewsFeed.Data;
 
 namespace HackerNewsFeed.Models
 {
@@ -66,7 +67,7 @@ namespace HackerNewsFeed.Models
             public int Created { get; set; }
 
             [JsonPropertyName("num_comments")]
-            public int NumComments { get; set; }
+            public int? NumComments { get; set; }
             
             [JsonIgnore] public DateTime Updated { get; set; }
 
@@ -78,7 +79,7 @@ namespace HackerNewsFeed.Models
                     Title = Title,
                     Url = Url,
                     Points = Points,
-                    Comments = NumComments,
+                    Comments = NumComments ?? 0,
                     Created = DateTimeOffset.FromUnixTimeSeconds(Created).UtcDateTime,
                     Updated = Updated,
                 };

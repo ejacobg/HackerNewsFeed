@@ -1,4 +1,4 @@
-@model IEnumerable<Item>
+@model IEnumerable<HackerNewsFeed.Data.Item>
 
 @{
     ViewBag.Title = "Feed";
@@ -38,7 +38,7 @@
         <tr @(item.Subscribed == false ? "style='display: none;'" : "")>
             <td>
                 @item.Points
-            </td>
+            </td>  
             <td>
                 <a href="@item.Url">@item.Title</a>
             </td>
@@ -46,7 +46,7 @@
                 @item.Created.ToString("g")
             </td>
             <td>
-                <a href="/Item/View/@item.ItemId">Num Comments</a>
+                <a href="/Item/View/@item.ItemId">@item.Comments Comments</a>
             </td>
             <td>
                 <input type="checkbox" @(item.Subscribed.GetValueOrDefault() ? "checked" : "") data-item-id="@item.ItemId"/>

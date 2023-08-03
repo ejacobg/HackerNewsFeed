@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace HackerNewsFeed.Models
+namespace HackerNewsFeed.Data
 {
     // Item reflects that of a Hacker News item, but typically represents an story, Ask HN, or Show HN post.
     public class Item
