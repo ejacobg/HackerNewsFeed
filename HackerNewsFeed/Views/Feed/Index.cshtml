@@ -4,10 +4,12 @@
     ViewBag.Title = "Feed";
 }
 
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
 <h1>Feed</h1>
 
 <button class="btn btn-primary">Refresh</button>
-<button class="btn btn-danger">Clear</button>
+@* <button class="btn btn-danger">Clear</button> *@ @* This button is a little redundant since Refreshing will also do a clear. *@
 <button class="btn btn-info">View All</button>
 
 <table class="table">
@@ -33,21 +35,21 @@
     <tbody>
     @foreach (var item in Model)
     {
-        <tr>
+        <tr @(item.Subscribed == false ? "style='display: none;'" : "")>
             <td>
                 @item.Points
             </td>
             <td>
-                <a href="@item.Url">@Html.DisplayFor(modelItem => item.Title)</a>
+                <a href="@item.Url">@item.Title</a>
             </td>
             <td>
                 @item.Created.ToString("g")
             </td>
             <td>
-                @item.ItemId
+                <a href="/Item/View/@item.ItemId">Num Comments</a>
             </td>
             <td>
-                <input type="checkbox" @(item.Subscribed.GetValueOrDefault() ? "checked" : "")/>
+                <input type="checkbox" @(item.Subscribed.GetValueOrDefault() ? "checked" : "") data-item-id="@item.ItemId"/>
                 @* <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> | *@
                 @* <a asp-action="Details" asp-route-id="@item.Id">Details</a> | *@
                 @* <a asp-action="Delete" asp-route-id="@item.Id">Delete</a> *@
@@ -56,3 +58,28 @@
     }
     </tbody>
 </table>
+
+<script>
+    // Handle checkbox change event
+    $(document).on('change', 'input[type="checkbox"]', function () {
+        let checkbox = $(this);
+        let itemId = checkbox.data('item-id');
+        let isChecked = checkbox.prop('checked');
+        let action = isChecked ? 'Subscribe' : 'Unsubscribe';
+
+        // Send an AJAX request to the server to update the item's Subscribed property
+        $.ajax({
+            url: `/Item/${action}/${itemId}`,
+            type: 'POST',
+            success: function (data) {
+                // Handle the server's response if needed
+                // console.log('Update successful:', data);
+            },
+            error: function (xhr, status, error) {
+                // Handle error if the request fails
+                alert(error)
+                checkbox.prop('checked', !isChecked); // Return the box to its original state
+            }
+        });
+    });
+</script>

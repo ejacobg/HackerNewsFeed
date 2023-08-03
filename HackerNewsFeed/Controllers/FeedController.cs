@@ -1,3 +1,4 @@
+using System.Threading.Tasks;
 using HackerNewsFeed.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,14 +12,14 @@ namespace HackerNewsFeed.Controllers
         {
             _feedService = feedService;
         }
-        
+
         // GET
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            _feedService.Update();
+            await _feedService.Update();
             return View(_feedService.Feed());
         }
-        
+
         // GET
         public IActionResult Refresh()
         {

@@ -26,6 +26,9 @@ namespace HackerNewsFeed
         {
             services.AddControllersWithViews();
             
+            // Create HTTP clients for the API provider.
+            services.AddHttpClient();
+            
             // Add our custom service.
             services.AddSingleton<IFeedService, MemoryFeed>();
         }
