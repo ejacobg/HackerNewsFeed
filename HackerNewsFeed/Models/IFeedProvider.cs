@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HackerNewsFeed.Models
 {
@@ -6,7 +7,7 @@ namespace HackerNewsFeed.Models
     public interface IFeedProvider
     {
         // Pull retrieves new or updated items to be put on the feed. These items typically come from the Hacker News front page, but may be configured otherwise.
-        IEnumerable<Item> Pull();
+        Task<List<Item>> Pull();
 
         // Pull attempts to retrieve data for the given item and writes it back into the object. If no updates were found, the timestamp will still be updated.
         void Pull(Item item);

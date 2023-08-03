@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace HackerNewsFeed.Models
 {
@@ -9,7 +10,7 @@ namespace HackerNewsFeed.Models
         IEnumerable<Item> Feed();
 
         // Update pulls new data for at least the subscribed items. Non-subscribed items are not guaranteed to be updated.
-        void Update();
+        Task Update();
 
         // Subscribe subscribes to the item with the given ID.
         // If the item is not on the feed, pulls data for it and adds it to the feed.

@@ -14,6 +14,8 @@ namespace HackerNewsFeed.Models
 
         public int Points { get; set; }
 
+        public int Comments { get; set; }
+
         // Created represents the time this item was submitted to Hacker News, not when it was created in our local database.
         [DataType(DataType.Date)] public DateTime Created { get; set; }
 
@@ -23,8 +25,5 @@ namespace HackerNewsFeed.Models
 
         // Subscribed is true if the user opened the item or explicitly subscribed to it, false if the user explicitly unsubscribed from it, and null if the user has yet to interact with this item.
         public bool? Subscribed { get; set; }
-
-        // https://learn.microsoft.com/en-us/dotnet/csharp/programming-guide/statements-expressions-operators/expression-bodied-members#read-only-properties
-        public string Discussion => $"https://news.ycombinator.com/item?id={ItemId}";
     }
 }

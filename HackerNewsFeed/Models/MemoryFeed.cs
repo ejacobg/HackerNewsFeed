@@ -1,17 +1,20 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace HackerNewsFeed.Models
 {
     // MemoryFeed saves feed information in memory.
     public class MemoryFeed : IFeedService
     {
-        private Dictionary<int, Item> _feed = new Dictionary<int, Item>();
-        private ReaderWriterLockSlim _feedLock = new ReaderWriterLockSlim();
-
-        public MemoryFeed()
+        private readonly Dictionary<int, Item> _feed = new Dictionary<int, Item>();
+        private readonly ReaderWriterLockSlim _feedLock = new ReaderWriterLockSlim();
+        private readonly IFeedProvider _provider;
+        
+        public MemoryFeed(HttpClient client)
         {
             for (var i = 0; i < 5; i++)
             {
@@ -26,6 +29,8 @@ namespace HackerNewsFeed.Models
                     Subscribed = null
                 });
             }
+
+            _provider = new ApiProvider(client);
         }
 
         public IEnumerable<Item> Feed()
@@ -33,13 +38,37 @@ namespace HackerNewsFeed.Models
             return _feed.Values.ToList();
         }
 
-        public void Update()
+        public async Task Update()
         {
+            // Needs to be put outside the locked section or you may run into issues.
+            // See: https://www.graymatterdeveloper.com/2019/12/05/async-sync/
+            var updates = await _provider.Pull();
+            
             _feedLock.EnterWriteLock();
 
+            var now = DateTime.Now;
+            
             foreach (var item in _feed.Values)
             {
                 item.Points++;
+                item.Updated = now;
+            }
+
+            foreach (var update in updates)
+            {
+                if (_feed.TryGetValue(update.ItemId, out var item))
+                {
+                    item.Title = update.Title;
+                    item.Url = update.Url;
+                    item.Points = update.Points;
+                    item.Created = update.Created;
+                    item.Updated = now;
+                }
+                else
+                {
+                    update.Updated = now;
+                    _feed.Add(update.ItemId, update);
+                }
             }
             
             _feedLock.ExitWriteLock();
