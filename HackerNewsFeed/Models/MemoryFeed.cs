@@ -36,7 +36,11 @@ namespace HackerNewsFeed.Models
 
         public Task<List<Item>> Feed()
         {
-            return Task.FromResult(_feed.Values.ToList());
+            return Task.FromResult(_feed.Values
+                .OrderByDescending(item => item.Subscribed == true)
+                .ThenBy(item => item.Subscribed.HasValue)
+                .ThenByDescending(item => item.Points)
+                .ToList());
         }
 
         public async Task Update()
@@ -75,29 +79,29 @@ namespace HackerNewsFeed.Models
             _feedLock.ExitWriteLock();
         }
 
-        public void Subscribe(int id)
+        public void Subscribe(int itemid)
         {
-            if (_feed.TryGetValue(id, out var item))
+            if (_feed.TryGetValue(itemid, out var item))
             {
                 item.Subscribed = true;
             }
             else
             {
-                _feed.Add(id, new Item
+                _feed.Add(itemid, new Item
                 {
-                    ItemId = id,
-                    Title = $"Item {id}",
-                    Url = $"/item/{id}",
-                    Points = id,
+                    ItemId = itemid,
+                    Title = $"Item {itemid}",
+                    Url = $"/item/{itemid}",
+                    Points = itemid,
                     Updated = DateTime.Now,
                     Subscribed = true
                 });
             }
         }
 
-        public void Unsubscribe(int id)
+        public void Unsubscribe(int itemid)
         {
-            if (_feed.TryGetValue(id, out var item))
+            if (_feed.TryGetValue(itemid, out var item))
             {
                 item.Subscribed = false;
             }
