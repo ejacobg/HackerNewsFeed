@@ -47,7 +47,7 @@ namespace HackerNewsFeed.Models
             return items;
         }
 
-        public async void Pull(Item item)
+        public async Task Pull(Item item)
         {
             var changes = await _client.GetFromJsonAsync<FirebaseModel>(FirebaseUrl + $"/item/{item.ItemId}.json");
             changes.UpdateItem(item);

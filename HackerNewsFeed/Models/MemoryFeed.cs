@@ -34,9 +34,9 @@ namespace HackerNewsFeed.Models
             _provider = new ApiProvider(client);
         }
 
-        public IEnumerable<Item> Feed()
+        public Task<List<Item>> Feed()
         {
-            return _feed.Values.ToList();
+            return Task.FromResult(_feed.Values.ToList());
         }
 
         public async Task Update()
@@ -103,7 +103,7 @@ namespace HackerNewsFeed.Models
             }
         }
 
-        public void Clear()
+        public Task Clear()
         {
             _feedLock.EnterWriteLock();
 
@@ -113,6 +113,8 @@ namespace HackerNewsFeed.Models
             }
             
             _feedLock.ExitWriteLock();
+
+            return Task.CompletedTask;
         }
     }
 }

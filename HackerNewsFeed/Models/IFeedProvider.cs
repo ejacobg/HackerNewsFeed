@@ -11,6 +11,6 @@ namespace HackerNewsFeed.Models
         Task<List<Item>> Pull();
 
         // Pull attempts to retrieve data for the given item and writes it back into the object. If no updates were found, the timestamp will still be updated.
-        void Pull(Item item);
+        Task Pull(Item item);
     }
 }

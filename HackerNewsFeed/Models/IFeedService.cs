@@ -8,7 +8,7 @@ namespace HackerNewsFeed.Models
     public interface IFeedService
     {
         // Feed returns the entire feed, including non-subscribed items.
-        IEnumerable<Item> Feed();
+        Task<List<Item>> Feed();
 
         // Update pulls new data for at least the subscribed items. Non-subscribed items are not guaranteed to be updated.
         Task Update();
@@ -22,6 +22,6 @@ namespace HackerNewsFeed.Models
         void Unsubscribe(int id);
         
         // Clear marks all non-subscribed items as unsubscribed.
-        void Clear();
+        Task Clear();
     }
 }
