@@ -8,9 +8,9 @@
 
 <h1>Feed</h1>
 
-<button class="btn btn-primary">Refresh</button>
+<a href="/Feed/Refresh"><button class="btn btn-primary">Refresh</button></a>
 @* <button class="btn btn-danger">Clear</button> *@ @* This button is a little redundant since Refreshing will also do a clear. *@
-<button class="btn btn-info">View All</button>
+@* <button class="btn btn-info">View All</button> *@
 
 <table class="table">
     <thead>
@@ -35,7 +35,7 @@
     <tbody>
     @foreach (var item in Model)
     {
-        <tr @(item.Subscribed == false ? "style='display: none;'" : "")>
+        <tr class=@(item.Subscribed == true ? "table-success" : (item.Subscribed == false ? "table-danger" : ""))>
             <td>
                 @item.Points
             </td>  
