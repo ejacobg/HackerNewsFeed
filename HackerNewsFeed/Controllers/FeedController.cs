@@ -17,13 +17,13 @@ namespace HackerNewsFeed.Controllers
         public async Task<IActionResult> Index()
         {
             await _feedService.Update();
-            return View(_feedService.Feed());
+            return View(await _feedService.Feed());
         }
 
         // GET
-        public IActionResult Refresh()
+        public async Task<IActionResult> Refresh()
         {
-            _feedService.Clear();
+            await _feedService.Clear();
             return RedirectToAction("Index");
         }
     }

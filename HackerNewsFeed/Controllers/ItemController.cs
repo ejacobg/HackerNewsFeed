@@ -13,7 +13,7 @@ namespace HackerNewsFeed.Controllers
         }
         
         // GET
-        public IActionResult Item(int id)
+        public IActionResult View(int id)
         {
             _feedService.Subscribe(id);
             return Redirect($"https://news.ycombinator.com/item?id={id}");
