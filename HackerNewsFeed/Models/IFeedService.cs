@@ -15,11 +15,11 @@ namespace HackerNewsFeed.Models
 
         // Subscribe subscribes to the item with the given ID.
         // If the item is not on the feed, pulls data for it and adds it to the feed.
-        void Subscribe(int id);
+        void Subscribe(int itemid);
 
         // Unsubscribe unsubscribes from the item with the given ID.
         // Unsubscribing from an item not on the feed is a no-op.
-        void Unsubscribe(int id);
+        void Unsubscribe(int itemid);
         
         // Clear marks all non-subscribed items as unsubscribed.
         Task Clear();
