@@ -64,6 +64,8 @@ namespace HackerNewsFeed.Models
             public string Title { get; set; }
             public string Url { get; set; }
             public int Points { get; set; }
+            
+            [JsonPropertyName("created_at_i")]
             public int Created { get; set; }
 
             [JsonPropertyName("num_comments")]
