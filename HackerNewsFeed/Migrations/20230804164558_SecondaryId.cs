@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HackerNewsFeed.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class SecondaryId : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,8 +11,9 @@ namespace HackerNewsFeed.Migrations
                 name: "Items",
                 columns: table => new
                 {
-                    ItemId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ItemId = table.Column<int>(type: "int", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Url = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Points = table.Column<int>(type: "int", nullable: false),
@@ -23,8 +24,14 @@ namespace HackerNewsFeed.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Items", x => x.ItemId);
+                    table.PrimaryKey("PK_Items", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Items_ItemId",
+                table: "Items",
+                column: "ItemId",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

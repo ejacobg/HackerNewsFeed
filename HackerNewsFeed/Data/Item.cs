@@ -1,11 +1,16 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace HackerNewsFeed.Data
 {
     // Item reflects that of a Hacker News item, but typically represents an story, Ask HN, or Show HN post.
+    [Index(nameof(ItemId), IsUnique = true)]
     public class Item
     {
+        [Key]
+        public int Id { get; set; }
         public int ItemId { get; set; }
         public string Title { get; set; }
 
