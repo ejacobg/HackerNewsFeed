@@ -39,6 +39,7 @@ namespace HackerNewsFeed
             
             // Add our custom service.
             services.AddSingleton<IFeedService, MemoryFeed>();
+            services.AddScoped<IFeedService, SqlServerFeed>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
