@@ -12,15 +12,15 @@ The feed can be refreshed in two ways: (1) using the browser controls (Ctrl+R, F
 
 When you run the application for the first time, all of the submissions will be undecided (no highlight is applied). Click on a submission's discussion link or mark the checkbox to subscribe to it:
 
-![](HackerNewsFeed\Screenshots\Subscribe.png)
+![Subscribe.png](HackerNewsFeed/Screenshots/Subscribe.png)
 
 Once you've subscribed to everything that interests you, use the `Refresh` button to unsubscribe from everything else:
 
-![](HackerNewsFeed\Screenshots\Refresh.png)
+![Refresh.png](HackerNewsFeed/Screenshots/Refresh.png)
 
 To check in on any developing discussions or to see if anything new was added to the homepage, refresh the page again (using either the browser controls or the `Refresh` button):
 
-![](HackerNewsFeed\Screenshots\Update.png)
+![Update.png](HackerNewsFeed/Screenshots/Update.png)
 
 You can always resubscribe to any articles. Changes are applied on the next refresh.
 
