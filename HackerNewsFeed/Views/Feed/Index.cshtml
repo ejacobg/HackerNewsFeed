@@ -46,7 +46,7 @@
                 @item.Created.ToString("g")
             </td>
             <td>
-                <a href="/Item/View/@item.ItemId">@item.Comments Comments</a>
+                <a href="/Item/View/@item.ItemId" target=”_blank”>@item.Comments Comments</a>
             </td>
             <td>
                 <input type="checkbox" @(item.Subscribed.GetValueOrDefault() ? "checked" : "") data-item-id="@item.ItemId"/>

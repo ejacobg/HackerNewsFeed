@@ -35,7 +35,7 @@ namespace HackerNewsFeed.Models
             var updates = await _provider.Pull();
 
             var feed = await _context.Items.ToDictionaryAsync(i => i.ItemId);
-            Console.WriteLine(feed);
+            // Console.WriteLine(feed);
             
             var now = DateTime.Now;
 
@@ -53,6 +53,7 @@ namespace HackerNewsFeed.Models
                 {
                     update.Updated = now;
                     _context.Add(update);
+                    feed.Add(update.ItemId, update);
                 }
             }
 
