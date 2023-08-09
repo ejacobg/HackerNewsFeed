@@ -1,6 +1,6 @@
 # Hacker News Feed
 
-An alternative Hacker News frontend. Allows you to keep track of any interesting submissions and ignore everything else. This project was made to practice some of the concepts discussed in Andrew Lock's [_ASP.NET Core in Action, Second Edition_](https://www.manning.com/books/asp-net-core-in-action-second-edition).
+An alternative Hacker News frontend. Allows you to keep track of any interesting submissions and ignore everything else. This project was made to practice some of the concepts discussed in Andrew Lock's [_ASP.NET Core in Action, Second Edition_](https://www.manning.com/books/asp-net-core-in-action-second-edition). For a discussion on the development of this project, see its associated [blog post](https://ejacobg.com/projects/hacker-news-feed/).
 
 The feed displays the current Hacker News front page and the entire Ask HN section on the same screen. You can then use the feed like how you would normally use the website - open any interesting articles and take a look at the discussion around them.
 
@@ -32,3 +32,4 @@ I've gotten mostly everything that I want out of this project and will be puttin
 - Deploy the application, allow users to have their own sessions.
 - Calculate points/comments change between refreshes.
 - Update the front page query (currently only considers points; does not consider the age of the submission).
+- Using better methods for concurrency control.

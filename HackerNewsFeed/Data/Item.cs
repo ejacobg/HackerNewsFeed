@@ -11,6 +11,8 @@ namespace HackerNewsFeed.Data
     {
         [Key]
         public int Id { get; set; }
+        
+        // The item's ID as given by Hacker News.
         public int ItemId { get; set; }
         public string Title { get; set; }
 
